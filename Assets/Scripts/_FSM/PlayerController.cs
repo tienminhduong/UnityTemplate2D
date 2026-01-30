@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(FSM))]
 public class PlayerController : MonoBehaviour
 {
     Collider2D _collider;
@@ -134,13 +137,13 @@ public class PlayerController : MonoBehaviour
             boxCenter,
             boxSize,
             0f,
-            LayerMask.GetMask("Ground")
+            LayerMask.GetMask(LayerMaskName.Ground)
         );
         return hit != null;
     }
     void OnDrawGizmos()
     {
-        Vector2 boxCenter = (Vector2)transform.position + (Vector2) boxCenterOffset;
+        Vector2 boxCenter = (Vector2)transform.position + (Vector2)boxCenterOffset;
 
         // Change color based on grounded state (Editor only)
         Gizmos.color = IsGrounded() ? Color.green : Color.red;
